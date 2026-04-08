@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "danny";
-  home.homeDirectory = "/home/danny";
-
   home.stateVersion = "25.11";
 
   # Let Home Manager manage itself
@@ -20,8 +17,32 @@
     clippy
     rainfrog
     pandoc
-    atuin
+    fzf
+    trivy
   ];
+
+  home.file.".local/bin/git-lb" = {
+    text = ''
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      branch="$(
+        git reflog --pretty='%gs' \
+          | sed -nE \
+              -e "s/^checkout: moving from .* to (.+)$/\1/p" \
+              -e "s/^switch: (.+) -> (.+)$/\2/p" \
+              -e "s/^switch: created branch '(.+)'$/\1/p" \
+          | awk '!seen[$0]++' \
+          | head -n 10 \
+          | fzf
+      )"
+
+      if [ -n "''${branch:-}" ]; then
+        git checkout "$branch"
+      fi
+    '';
+    executable = true;
+  };
 
   # --- Direnv ---
   programs.direnv = {
@@ -33,14 +54,14 @@
   programs.git = {
     enable = true;
     settings = {
-        user.name = "Danny";
-        user.email = "danny@loxley.digital";
+      user.name = "Danny";
+
+      core.editor = "vi";
+      rerere.enabled = true;
     };
   };
 
-  programs.atuin = {
-    enable = true;
-  };
+  programs.atuin.enable = true;
 
   programs.zsh = {
     enable = true;
