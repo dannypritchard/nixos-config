@@ -21,6 +21,9 @@
     rainfrog
     pandoc
     atuin
+    awscli2
+    fnm
+    bubblewrap
   ];
 
   # --- Direnv ---
@@ -45,6 +48,10 @@
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
+
+    initContent = ''
+      eval "$(fnm env --use-on-cd --shell zsh)"
+    '';
   };
 
   programs.starship = {
