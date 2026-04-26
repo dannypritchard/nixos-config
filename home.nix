@@ -23,6 +23,8 @@
     atuin
     awscli2
     fnm
+    bind
+    postgresql
     bubblewrap
   ];
 
