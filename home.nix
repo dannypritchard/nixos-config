@@ -19,32 +19,19 @@
     pandoc
     fzf
     trivy
+    fnm
+    ffmpeg
   ];
 
   home.file.".local/bin/git-lb" = {
-    text = ''
-      #!/usr/bin/env bash
-      set -euo pipefail
-
-      branch="$(
-        git reflog --pretty='%gs' \
-          | sed -nE \
-              -e "s/^checkout: moving from .* to (.+)$/\1/p" \
-              -e "s/^switch: (.+) -> (.+)$/\2/p" \
-              -e "s/^switch: created branch '(.+)'$/\1/p" \
-          | awk '!seen[$0]++' \
-          | head -n 10 \
-          | fzf
-      )"
-
-      if [ -n "''${branch:-}" ]; then
-        git checkout "$branch"
-      fi
-    '';
+    source = ./scripts/git-lb.sh;
     executable = true;
   };
 
-  # --- Direnv ---
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
