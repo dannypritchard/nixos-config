@@ -17,6 +17,11 @@
     clippy
     rainfrog
     pandoc
+    atuin
+    awscli2
+    bind
+    postgresql
+    # bubblewrap
     fzf
     trivy
     fnm

@@ -8,6 +8,9 @@
     # ./services.nix
   ];
 
+  # needed for vscode
+  programs.nix-ld.enable = true;
+
   # --- WSL ---
   wsl.enable = true;
   wsl.defaultUser = "danny";
