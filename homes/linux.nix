@@ -7,7 +7,7 @@
 
   # Optional: Linux-only package tweaks go here
   home.packages = with pkgs; [
-    # add terminal tools that exist on Linux
+    bubblewrap
   ];
 
   programs.git.settings.user.email = "danny@loxley.digital";

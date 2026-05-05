@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.stateVersion = "25.11";
@@ -21,7 +21,6 @@
     awscli2
     bind
     postgresql
-    # bubblewrap
     fzf
     trivy
     fnm
@@ -58,6 +57,18 @@
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
+
+
+    initContent = ''
+      export PATH="/etc/profiles/per-user/$USER/bin:$PATH"
+
+      export PATH="$HOME/.local/bin:$PATH"
+
+      eval "$(fnm env --use-on-cd --shell zsh)"
+
+      autoload -Uz select-word-style
+      select-word-style bash
+    '';
   };
 
   programs.starship = {
