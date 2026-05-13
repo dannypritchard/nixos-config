@@ -26,6 +26,7 @@
     bind
     postgresql
     bubblewrap
+    obsidian
   ];
 
   # --- Direnv ---
