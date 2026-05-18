@@ -30,6 +30,11 @@
     shell = pkgs.zsh;
   };
 
+  # --- Nixpkgs ---
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "obsidian"
+  ];
+
   # --- Nix ---
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
