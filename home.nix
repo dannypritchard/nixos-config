@@ -25,6 +25,7 @@
     trivy
     fnm
     ffmpeg
+    opencode
   ];
 
   home.file.".local/bin/git-lb" = {
