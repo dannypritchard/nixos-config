@@ -48,7 +48,7 @@
     settings = {
       user.name = "Danny";
 
-      core.editor = "vi";
+      core.editor = "nano";
       rerere.enabled = true;
     };
   };
