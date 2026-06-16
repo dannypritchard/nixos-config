@@ -11,6 +11,7 @@
     git
     curl
     ripgrep
+    jq
     rustc
     cargo
     rustfmt
@@ -23,6 +24,7 @@
     postgresql
     fzf
     trivy
+    vulnix
     fnm
     ffmpeg
   ];
@@ -31,6 +33,13 @@
     source = ./scripts/git-lb.sh;
     executable = true;
   };
+
+  home.file.".local/bin/nix-flake-audit" = {
+    source = ./scripts/nix-flake-audit.sh;
+    executable = true;
+  };
+
+  home.file.".config/zsh/nix-flake-audit.zsh".source = ./scripts/nix-flake-audit.zsh;
 
   home.sessionPath = [
     "$HOME/.local/bin"
@@ -68,6 +77,9 @@
 
       autoload -Uz select-word-style
       select-word-style bash
+
+      # Audit flakes for CVEs
+      source "$HOME/.config/zsh/nix-flake-audit.zsh"
     '';
   };
 
