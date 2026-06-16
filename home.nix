@@ -27,6 +27,7 @@
     vulnix
     fnm
     ffmpeg
+    opencode
   ];
 
   home.file.".local/bin/git-lb" = {
@@ -56,7 +57,7 @@
     settings = {
       user.name = "Danny";
 
-      core.editor = "vi";
+      core.editor = "nano";
       rerere.enabled = true;
     };
   };
