@@ -62,6 +62,14 @@
     };
   };
 
+  services.ollama = {
+    enable = true;
+
+    environmentVariables = {
+      OLLAMA_DEBUG = "1";
+    };
+  };
+
   programs.atuin.enable = true;
 
   programs.zsh = {

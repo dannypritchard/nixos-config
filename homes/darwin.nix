@@ -14,5 +14,7 @@
     php84Packages.composer
   ];
 
+  services.ollama.acceleration = false;
+
   programs.git.settings.user.email = "danny.pritchard@synchtank.net";
 }
