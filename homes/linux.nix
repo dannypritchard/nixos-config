@@ -11,5 +11,7 @@
     obsidian
   ];
 
+  services.ollama.acceleration = "rocm";
+
   programs.git.settings.user.email = "danny@loxley.digital";
 }
