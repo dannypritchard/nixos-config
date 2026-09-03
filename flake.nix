@@ -14,27 +14,13 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-darwin, ... }:
-  let
-    mkHome = { system, username, homeDirectory, extraModules ? [ ] }:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules =
-          [
-            ./home.nix
-            {
-              home.username = username;
-              home.homeDirectory = homeDirectory;
-            }
-          ]
-          ++ extraModules;
-      };
-  in {
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-darwin, ... }: {
     nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         nixos-wsl.nixosModules.default
         ./hosts/wsl/configuration.nix
+        ./modules/nix-gc.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -47,6 +33,7 @@
       system = "aarch64-darwin";
       modules = [
         ./hosts/macbook/configuration.nix
+        ./modules/nix-gc.nix
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -54,18 +41,6 @@
           home-manager.users.danny = import ./homes/darwin.nix;
         }
       ];
-    };
-
-    homeConfigurations."danny-linux" = mkHome {
-      system = "x86_64-linux";
-      username = "danny";
-      homeDirectory = "/home/danny";
-    };
-
-    homeConfigurations."danny-darwin" = mkHome {
-      system = "aarch64-darwin";
-      username = "danny";
-      homeDirectory = "/Users/danny";
     };
   };
 }

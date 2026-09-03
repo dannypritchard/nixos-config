@@ -2,6 +2,7 @@
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.gc.interval = [{ Weekday = 0; Hour = 3; Minute = 0; }];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 

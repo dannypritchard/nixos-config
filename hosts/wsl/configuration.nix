@@ -37,6 +37,7 @@
 
   # --- Nix ---
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.gc.dates = "weekly";
 
   # --- System packages ---
   environment.systemPackages = with pkgs; [
