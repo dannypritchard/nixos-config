@@ -21,6 +21,18 @@
       name = "whoami";
       src = "${pkgs.coreutils}/bin/whoami";
     }
+    {
+      name = "install";
+      src = "${pkgs.coreutils}/bin/install";
+    }
+    {
+      name = "mv";
+      src = "${pkgs.coreutils}/bin/mv";
+    }
+    {
+      name = "test";
+      src = "${pkgs.coreutils}/bin/test";
+    }
   ];
 
   # --- User ---
